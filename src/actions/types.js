@@ -1,0 +1,4 @@
+export const UPLOAD_VIDEO = 'UPLOAD_VIDEO';
+export const UPLOAD_PENDING = 'UPLOAD_PENDING';
+export const UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
+export const UPLOAD_FAIL = 'UPLOAD_FAIL';

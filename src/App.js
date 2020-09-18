@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './App.css';
-// import Video from './js/containers/VideoContainer';
-// import { VideoContainer } from './js/containers/VideoContainer';
-// import { VideoForm } from './js/components/VideoForm';
+
+import {
+    doUploadVideo
+} from './actions/action-creators';
 
 class App extends Component {
     render() {
@@ -11,9 +13,29 @@ class App extends Component {
                 <h1>Meshvids</h1>
                 <h2>Link your videos. Control the order. Customize. Hit Play!</h2>
 
+                {/* EDITOR */}
+
+                <button onClick={() => doUploadVideo()} value={'Upload'}>Upload Episodes</button>
+
+                <video width="320" height="240" controls>
+                    <source src="movie.mp4" type="video/mp4" />
+                    <source src="movie.ogg" type="video/ogg" />Your browser does not support the video tag.
+                </video>
+
+                {/* PLAY REEL */}
+
+
             </div>
         );
     }
 }
 
-export default App;
+const mapState = state => ({
+    video: state.video.videoInfo
+});
+
+const mapDispatch = dispatch => ({
+    handleUploadVideo: () => dispatch(doUploadVideo())
+});
+
+export default connect(mapState, mapDispatch)(App);
