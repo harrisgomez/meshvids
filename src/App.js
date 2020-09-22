@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { VideoContainer } from './js/containers/VideoContainer';
 import './App.css';
 
 import {
@@ -13,17 +14,7 @@ class App extends Component {
                 <h1>Meshvids</h1>
                 <h2>Link your videos. Control the order. Customize. Hit Play!</h2>
 
-                {/* EDITOR */}
-
-                <button onClick={() => doUploadVideo()} value={'Upload'}>Upload Episodes</button>
-
-                <video width="320" height="240" controls>
-                    <source src="movie.mp4" type="video/mp4" />
-                    <source src="movie.ogg" type="video/ogg" />Your browser does not support the video tag.
-                </video>
-
-                {/* PLAY REEL */}
-
+                <VideoContainer />
 
             </div>
         );
