@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { VideoContainer } from './js/containers/VideoContainer';
 import './App.css';
+import 'tachyons';
 
 import {
     doUploadVideo

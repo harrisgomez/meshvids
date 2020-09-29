@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
+import './VideoContainer.css';
 // import { Video } from '../components/Video';
 
 export class VideoContainer extends Component {
     componentDidMount() {
         (() => {
             const URL = window.URL || window.webkitURL;
-            const displayMessage = (message, isError) => {
-                const element = document.querySelector('#message');
-                element.innerHTML = message;
-                element.className = isError ? 'error' : 'info';
-            };
+            // const displayMessage = (message, isError) => {
+            //     const element = document.querySelector('#message');
+            //     element.innerHTML = message;
+            //     element.className = isError ? 'error' : 'info';
+            // };
             const playSelectedFile = function (event) {
                 const file = this.files[0];
-                const type = file.type;
+                // const type = file.type;
                 const videoNode = document.querySelector('video');
-                let canPlay = videoNode.canPlayType(type);
+                // let canPlay = videoNode.canPlayType(type);
 
-                if (canPlay === '') canPlay = 'no';
+                // if (canPlay === '') canPlay = 'no';
 
-                const message = 'Can play type "' + type + '": ' + canPlay;
-                const isError = canPlay === 'no';
+                // const message = 'Can play type "' + type + '": ' + canPlay;
+                // const isError = canPlay === 'no';
 
-                displayMessage(message, isError);
+                // displayMessage(message, isError);
 
-                if (isError) return;
+                // if (isError) return;
 
                 const fileURL = URL.createObjectURL(file);
 
@@ -36,12 +37,12 @@ export class VideoContainer extends Component {
     }
 
     render() {
-        console.log(this.props.videoIds);
         return (
-            <div id="video-container">
-                <div id="message"></div>
-                <input type="file" accept="video/*" />
-                <video controls autoPlay></video>
+            <div id="video-container" className=''>
+                {/* <div id="message"></div> */}
+                <input id='video' style={{display: 'none'}} type="file" accept="video/*" />
+                <label htmlFor="video">Upload</label>
+                <video className='w-20' controls autoPlay></video>
             </div>
         );
     }
