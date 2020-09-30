@@ -13,8 +13,8 @@ export class VideoItem extends Component {
 
     render() {
         return (
-            <li>
-                <video className='w-20' ref={this.videoNode} controls autoPlay></video>
+            <li className='list'>
+                <video className='w-20' ref={this.videoNode} controls></video>
             </li>
         );
     }
