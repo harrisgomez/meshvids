@@ -4,23 +4,18 @@ import { VideoList } from './js/containers/VideoList';
 import './App.css';
 import 'tachyons';
 
+// TODO Arrange videos horizontally
+
 import {
     doUploadVideo
 } from './actions/action-creators';
 
 class App extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.labelRef = React.createRef();
-    // }
-
-    
-
     render() {
         return (
             <div className="App" >
                 <h1>Meshvids</h1>
-                <h2>Link your videos. Control the order. Customize. Hit Play!</h2>
+                <h2>Link your videos. Customize the order. Hit Play!</h2>
 
                 <VideoList />
 

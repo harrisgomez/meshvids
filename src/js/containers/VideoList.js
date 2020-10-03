@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import VideoItem from '../components/VideoItem';
 import './VideoList.css';
 
-// TODO Detach upload button
-// TODO Create unordered list style of adding videos
-
 export class VideoList extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             URL: '',
-            videos: []
+            videos: [],
+            dragIdx: '',
+            clone: null
         }
 
         this.inputNode = React.createRef();
+        this.setDragIdx = this.setDragIdx.bind(this);
+        this.setCloneNode = this.setCloneNode.bind(this);
         this.playSelectedFile = this.playSelectedFile.bind(this);
     }
 
@@ -24,6 +24,16 @@ export class VideoList extends Component {
         inputNode.addEventListener('change', this.playSelectedFile, false);
 
         this.setState({ URL: window.URL || window.webkitURL });
+    }
+
+    setDragIdx(dragIdx) {
+        console.log('typeof', typeof dragIdx);
+        this.setState({ dragIdx: dragIdx.toString() });
+        console.log(this.state);
+    }
+
+    setCloneNode(clone) {
+        this.setState({ clone });
     }
 
     playSelectedFile(e) {
@@ -47,7 +57,16 @@ export class VideoList extends Component {
 
                 <ul id='video-list'>
                     {this.state.videos.map((fileURL, idx) =>
-                        <VideoItem key={`video-${idx}`} file={fileURL} />
+                        <VideoItem
+                            key={`video-${idx}`}
+                            props={{...this.state}}
+                            file={fileURL}
+                            fileIdx={idx}
+                            setDragIdx={this.setDragIdx}
+                            setCloneNode={this.setCloneNode}
+                            dragIdx={{...this.state.dragIdx}}
+                            clone={this.state.clone}
+                        />
                     )}
                 </ul>
             </div>
