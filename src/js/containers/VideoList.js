@@ -8,13 +8,11 @@ export class VideoList extends Component {
         this.state = {
             URL: '',
             videos: [],
-            dragIdx: '',
-            clone: null
+            dragId: ''
         }
 
         this.inputNode = React.createRef();
-        this.setDragIdx = this.setDragIdx.bind(this);
-        this.setCloneNode = this.setCloneNode.bind(this);
+        this.setDragId = this.setDragId.bind(this);
         this.playSelectedFile = this.playSelectedFile.bind(this);
     }
 
@@ -26,14 +24,8 @@ export class VideoList extends Component {
         this.setState({ URL: window.URL || window.webkitURL });
     }
 
-    setDragIdx(dragIdx) {
-        console.log('typeof', typeof dragIdx);
-        this.setState({ dragIdx: dragIdx.toString() });
-        console.log(this.state);
-    }
-
-    setCloneNode(clone) {
-        this.setState({ clone });
+    setDragId(dragId) {
+        this.setState({ dragId });
     }
 
     playSelectedFile(e) {
@@ -59,13 +51,10 @@ export class VideoList extends Component {
                     {this.state.videos.map((fileURL, idx) =>
                         <VideoItem
                             key={`video-${idx}`}
-                            props={{...this.state}}
                             file={fileURL}
                             fileIdx={idx}
-                            setDragIdx={this.setDragIdx}
-                            setCloneNode={this.setCloneNode}
-                            dragIdx={{...this.state.dragIdx}}
-                            clone={this.state.clone}
+                            setDragId={this.setDragId}
+                            {...this.state}
                         />
                     )}
                 </ul>

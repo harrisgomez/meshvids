@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// ! String idx is currently coerced to JSON when storing in state
+// ! Swap still buggy
 
 export class VideoItem extends Component {
     constructor(props) {
@@ -19,42 +19,30 @@ export class VideoItem extends Component {
         e.dataTransfer.setData('application/x-moz-file', e.target);
         e.dataTransfer.setData('text', e.target.id);
 
-        const itemIdx = e.dataTransfer.getData('text');
-        console.log('itemIdx', itemIdx);
-        this.props.setDragIdx(itemIdx);
-        // console.log('idx being dragged', this.props.dragIdx);
+        const itemId = e.dataTransfer.getData('text');
+
+        this.props.setDragId(itemId);
     }
 
     drop(e) {
         e.preventDefault();
 
-        // let clone = this.props.clone;
-
-        // clone = e.target.cloneNode(true);
-        this.props.setCloneNode(e.target.cloneNode(true));
-        
-        let dropIdx = e.dataTransfer.getData('application/x-moz-file'); // dragged idx
-
+        const clone = e.target.cloneNode(true);
+        let dropId = e.dataTransfer.getData('text');
         let nodeList = document.getElementById('video-list').childNodes;
-        // console.log('nodeList[0]', nodeList[0].id);
-        // console.log('data', data);
+        
+        console.log('drag', this.props.dragId);
+        console.log('drop', dropId);
+        console.log('list', document.getElementById('video-list'));
+        console.log('node', document.getElementById(dropId));
+        console.log('target', e.target.parentNode);
 
-        let dragIdx = this.props;
-        
-        // console.log('original idx from drag', dragIdx);
-        console.log('old idx', dragIdx);
-        console.log('state', this.props);
-        
         for (let i = 0; i < nodeList.length; i++) {
-            // if (nodeList[i].id === data) console.log(data)
-            if (nodeList[i].id === dropIdx) dragIdx = dropIdx;
-            if (nodeList[i].id === dropIdx) console.log('new idx', dropIdx)
+            if (nodeList[i].id === dropId) this.props.setDragId(dropId);
         }
 
-        // console.log('replacement', drop);
-
-        // document.getElementById('video-list').replaceChild(document.getElementById(data), e.target);
-        // document.getElementById('video-list').insertBefore(clone, document.getElementById('video-list').childNodes[dragIdx]);
+        document.getElementById('video-list').replaceChild(document.getElementById(dropId), e.target.parentNode);
+        document.getElementById('video-list').insertBefore(clone, document.getElementById('video-list').childNodes[this.props.dragId]);
 
     }
 
